@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
         });
 });
 // Add services to the container.
-builder.Services.AddScoped<FlashcardServices>();
+builder.Services.AddSingleton<FlashcardServices>();
 builder.Services.AddDbContext<FlashcardContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CardsDb")));
 
 builder.Services.AddControllers();
