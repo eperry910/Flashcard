@@ -16,13 +16,27 @@ public class FlashcardServices
     }
     public Flashcard UpdateFlashcard(Flashcard flashcard)
     {
-        _context.Flashcards.Update(flashcard);
+        var result = _context.Flashcards.FirstOrDefault(x => x.cardID == flashcard.cardID);
+        result.DayCreated = DateTime.Now;
+        if (!string.IsNullOrEmpty(flashcard.Answer))
+        {
+            result.Answer = flashcard.Answer;
+        }
+        if (!string.IsNullOrEmpty(flashcard.Prompt))
+        {
+            result.Prompt = flashcard.Prompt;
+        }
+        if (!string.IsNullOrEmpty(flashcard.Category))
+        {
+            result.Category = flashcard.Category;
+        }
         _context.SaveChanges();
         return flashcard;
     }
     public Flashcard DeleteFlashcard(Flashcard flashcard)
     {
-        _context.Flashcards.Remove(flashcard);
+        Flashcard result = _context.Flashcards.FirstOrDefault(x => x.cardID == flashcard.cardID);
+        _context.Flashcards.Remove(result);
         _context.SaveChanges();
         return flashcard;
     }
