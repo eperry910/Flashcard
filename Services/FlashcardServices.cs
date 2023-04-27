@@ -10,7 +10,7 @@ public class FlashcardServices
     }
     public Flashcard AddFlashcard(Flashcard flashcard)
     {
-        _context.Flashcards.Add(flashcard);
+        _context.Add(flashcard);
         _context.SaveChanges();
         return flashcard;
     }
